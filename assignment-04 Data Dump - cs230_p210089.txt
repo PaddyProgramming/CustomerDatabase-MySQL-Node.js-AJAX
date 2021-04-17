@@ -1,0 +1,166 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Apr 05, 2021 at 11:54 AM
+-- Server version: 10.3.27-MariaDB-0+deb10u1
+-- PHP Version: 7.3.27-1~deb10u1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `cs230_p210089`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CustomerCombinedAddresses`
+--
+
+CREATE TABLE `CustomerCombinedAddresses` (
+  `CustomerID` int(25) NOT NULL,
+  `CustomerHomeAddressID` int(25) NOT NULL,
+  `CustomerShippingAddressID` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CustomerDetailsv1`
+--
+
+CREATE TABLE `CustomerDetailsv1` (
+  `CustomerID` bigint(20) UNSIGNED NOT NULL,
+  `Title` varchar(5) DEFAULT NULL,
+  `FirstName` varchar(25) NOT NULL,
+  `Surname` varchar(25) NOT NULL,
+  `Mobile` varchar(25) NOT NULL,
+  `EmailAddress` varchar(50) NOT NULL
+) ;
+
+--
+-- Dumping data for table `CustomerDetailsv1`
+--
+
+INSERT INTO `CustomerDetailsv1` (`CustomerID`, `Title`, `FirstName`, `Surname`, `Mobile`, `EmailAddress`) VALUES
+(1, 'Mr', 'Jack', 'Jacky', '0864343278', 'jack@mail.com'),
+(2, 'Mr', 'John', 'Doe', '0754879321', 'john@mail.com'),
+(3, 'Mrs', 'Jane', 'Smith', '08754688', 'jane@mail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CustomerHomeAddressv1`
+--
+
+CREATE TABLE `CustomerHomeAddressv1` (
+  `CustomerHomeAddressID` bigint(20) UNSIGNED NOT NULL,
+  `AddressLine1` varchar(25) NOT NULL,
+  `AddressLine2` varchar(25) DEFAULT NULL,
+  `Town` varchar(25) NOT NULL,
+  `County` varchar(25) NOT NULL,
+  `Eircode` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `CustomerHomeAddressv1`
+--
+
+INSERT INTO `CustomerHomeAddressv1` (`CustomerHomeAddressID`, `AddressLine1`, `AddressLine2`, `Town`, `County`, `Eircode`) VALUES
+(1, 'Main Road', 'Ave', 'Sligo', 'Sligo', 'F91X0PC'),
+(2, 'High Road', '', 'Sligo', 'Sligo', 'F91JHF46'),
+(3, 'Green Road', 'Heights', 'Sligo', 'Sligo', 'F91286HY');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CustomerShippingAddressv1`
+--
+
+CREATE TABLE `CustomerShippingAddressv1` (
+  `CustomerShippingAddressID` bigint(20) UNSIGNED NOT NULL,
+  `AddressLine1` varchar(25) NOT NULL,
+  `AddressLine2` varchar(25) DEFAULT NULL,
+  `Town` varchar(25) NOT NULL,
+  `County` varchar(25) NOT NULL,
+  `Eircode` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `CustomerShippingAddressv1`
+--
+
+INSERT INTO `CustomerShippingAddressv1` (`CustomerShippingAddressID`, `AddressLine1`, `AddressLine2`, `Town`, `County`, `Eircode`) VALUES
+(1, 'Main Road', 'Ave', 'Sligo', 'Sligo', 'F91X0PC'),
+(2, 'High Road', '', 'Sligo', 'Sligo', 'F91JHF46'),
+(3, 'Green Road', 'Heights', 'Sligo', 'Sligo', 'F91286HY');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `CustomerCombinedAddresses`
+--
+ALTER TABLE `CustomerCombinedAddresses`
+  ADD PRIMARY KEY (`CustomerID`,`CustomerHomeAddressID`,`CustomerShippingAddressID`),
+  ADD KEY `CustomerHomeAddressID` (`CustomerHomeAddressID`),
+  ADD KEY `CustomerShippingAddressID` (`CustomerShippingAddressID`);
+
+--
+-- Indexes for table `CustomerDetailsv1`
+--
+ALTER TABLE `CustomerDetailsv1`
+  ADD PRIMARY KEY (`CustomerID`),
+  ADD UNIQUE KEY `CustomerID` (`CustomerID`);
+
+--
+-- Indexes for table `CustomerHomeAddressv1`
+--
+ALTER TABLE `CustomerHomeAddressv1`
+  ADD PRIMARY KEY (`CustomerHomeAddressID`),
+  ADD UNIQUE KEY `CustomerHomeAddressID` (`CustomerHomeAddressID`);
+
+--
+-- Indexes for table `CustomerShippingAddressv1`
+--
+ALTER TABLE `CustomerShippingAddressv1`
+  ADD PRIMARY KEY (`CustomerShippingAddressID`),
+  ADD UNIQUE KEY `CustomerShippingAddressID` (`CustomerShippingAddressID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `CustomerDetailsv1`
+--
+ALTER TABLE `CustomerDetailsv1`
+  MODIFY `CustomerID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `CustomerHomeAddressv1`
+--
+ALTER TABLE `CustomerHomeAddressv1`
+  MODIFY `CustomerHomeAddressID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `CustomerShippingAddressv1`
+--
+ALTER TABLE `CustomerShippingAddressv1`
+  MODIFY `CustomerShippingAddressID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
